@@ -180,7 +180,7 @@ anal_data = uibuttongroup('Parent',p1,'Title','Analyze Data','FontSize',12,'Posi
 
 % Popup menu for selecting type of analysis
 %anal_select = uicontrol('Parent',anal_data,'Style','popupmenu','FontUnits','normalized','String',{'Membrane Potential','Activation','Conduction','APD','Phase','Dominant Frequency'},'Position',[5 85 165 25],'Callback',{@anal_select_callback});
-anal_select = uicontrol('Parent',anal_data,'Style','popupmenu','FontUnits','normalized','String',{'Membrane Potential','Activation','-------','APD','Phase','Dominant Frequency'},'Position',[5 85 165 25],'Callback',{@anal_select_callback});
+anal_select = uicontrol('Parent',anal_data,'Style','popupmenu','FontUnits','normalized','String',{'Membrane Potential','Activation','CV','APD','Phase','Dominant Frequency'},'Position',[5 85 165 25],'Callback',{@anal_select_callback});
 
 % Invert Color Map Option
 invert_cmap = uicontrol('Parent',anal_data,'Style','checkbox','FontUnits','normalized','String','Invert Colormaps','Position',[175 88 150 25],'Visible','on','Callback',{@invert_cmap_callback});
@@ -1673,10 +1673,10 @@ handles.camPos{5} = get(camG_scrn,'Position');
                 endtimemap_text,endtimemap_edit,createmap_button],...
                 'Visible','on','Enable','on')
             % Turn unneeded buttons off
-            set([minMap_text,minMap_edit,maxMap_text,maxMap_edit,...
-                percentapd_text,percentapd_edit,remove_motion_click,...
-                remove_motion_click_txt],'Visible',...
-                'off','Enable','off')
+%            set([minMap_text,minMap_edit,maxMap_text,maxMap_edit,...
+%                percentapd_text,percentapd_edit,remove_motion_click,...
+%                remove_motion_click_txt],'Visible',...
+%                'off','Enable','off')
         elseif anal_state == 4
             % Turn needed buttons on
             set([invert_cmap,starttimemap_text,starttimemap_edit,...
@@ -1818,12 +1818,12 @@ handles.camPos{5} = get(camG_scrn,'Position');
             screenUpdate(actMap,actMapGeo,handles.frame)
             handles.val2D = handles.actMapGeo;
             % FOR CONDUCTION VELOCITY
-% % %         elseif check == 3
+         elseif check == 3
 % % %             %             return
-% % %             rect = getrect(camG_scrn);
-% % %             gg=msgbox('Building Conduction Velocity Map...');
-% % %             cMap(handles.cmosData,handles.a_start,handles.a_end,handles.Fs,handles.bg,rect);
-% % %             close(gg)
+             rect = getrect(camG_scrn);
+             gg=msgbox('Building Conduction Velocity Map...');
+             cMap(handles.cmosData,handles.a_start,handles.a_end,handles.Fs,handles.bg,rect);
+             close(gg)
             % FOR ACTION POTENTIAL DURATION
         elseif check == 4
             gg=msgbox('Creating Global APD Map...');
